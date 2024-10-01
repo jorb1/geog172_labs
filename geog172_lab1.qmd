@@ -1,0 +1,160 @@
+---
+title: "GEOG 172 Lab 1"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+
+#load libraries
+library(tidyverse)
+library(tibble)
+library(dplyr)
+library(knitr)
+library(here)
+```
+
+
+# Geog 172: Probability and Statistics (Lab 1)
+## Due on October 16, 2024 before 9.30 am
+
+Directions: Please answer all portions of the questions, providing appropriate examples and evidence as needed. Please label the questions you’re trying to answer. Describe the answers
+you get in words as well as provide all your calculations. If you use any symbols in your answer
+sheet, please state in words what each symbol stands for, and indicate the units of the answers
+wherever applicable. Provide the code used to solve these problems with your answers.
+
+
+*Download the data labeled from Canvas.*
+
+```{r}
+incomes <- read_csv(here("data", "median_household_incomes.csv"))
+```
+
+
+**1. The 236 values that appear in the excel sheet on Canvas are the 1990 median household incomes (in dollars) for the 236 census tracts of Buffalo, New York.**
+
+  a) For the first 19 tracts, find the mean, median, range, interquartile range, standard deviation, and variance. In addition, construct a box plot, and a histogram for these 19 observations.
+  
+```{r}
+#make a subset dataframe with just the first 19 rows. 
+first19 <- incomes[c(1:19), c(1:2)]
+
+#find the mean
+first19_mean <- mean(first19$Income)
+print(first19_mean)
+
+#find the median
+first19_median <- median(first19$Income)
+print(first19_median)
+
+#find the range
+first19_range <- range(first19$Income)
+print(first19_range)
+
+#find the interquartile range
+first19_iqr <- IQR(first19$Income)
+print(first19_iqr)
+
+#find the standard deviation
+first19_sd <- sd(first19$Income)
+print(first19_sd)
+
+#find the variance
+first19_var <- var(first19$Income)
+print(first19_var)
+
+#construct a boxplot
+
+#construct a histogram
+```
+
+  
+  b) Repeat part a, this time using all 236 observations.
+  
+  
+  c) Comment on your results. In particular, what does it mean to find the mean of set of medians? How do the observations that have a value of 0 affect the results? Should they be included?
+
+
+
+**2. The following data represent stream link lengths in a river network (given in meters):**
+
+100, 426, 322, 466, 112, 155, 388, 1155, 234, 324, 556, 221, 18, 133, 177, 441.
+
+  Find the mean and standard deviation of the stream lengths.
+
+**3. What is the coefficient of variation among the following commuting times (in minutes):**
+
+23, 43, 42, 7, 23, 11, 23, 55?
+
+**4. The following data are derived by Rogerson et al. (1993) from the US National Survey of Families and Households. Cumulative relative frequency distribution of distance to parents among adult children is shown below:**
+
+```{r, echo = FALSE}
+families_df <- data.frame(
+  Distance = c(5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 
+               100, 150, 250, 300, 350, 400, 450, 500, 
+               1000, 1500, 2000, 2500, 3000, 3500),
+  CumulativeRelativeFrequency = c(0.236, 0.338, 0.418, 0.460, 0.492, 
+                                  0.522, 0.546, 0.556, 0.565, 0.575, 
+                                  0.643, 0.683, 0.741, 0.756, 0.777, 
+                                  0.787, 0.800, 0.808, 0.876, 0.921, 
+                                  0.945, 0.966, 0.974, 0.994)
+)
+
+# Check the data frame
+kable(families_df, format = "markdown")
+
+```
+
+
+Questions below apply to adult children who have both parents alive and living together.
+
+  a. What fraction of adult children have parents that live more than 30 miles away,
+but no more than 100 miles away?
+  b. What fraction of adult children has parents that live more than 250 miles away?
+  c. What is the likelihood that at least one of three randomly chosen adults will have
+parents living more than 100 miles away?
+  i. Show sample space.
+  ii. Assign probabilities to each element in the sample space.
+  iii. Give the desired probability.
+
+d. What is the median distance that characterizes the spatial separation of parents
+and their adult children?
+
+e. Determine the likelihood that two or more adult children out of a group of ten live
+more than 1000 miles from their parents.
+
+**5. Incomes are exponentially distributed with a mean of $10,000. What fraction of the population has income:**
+  a) Less than or equal to $8000?
+  b) Greater than $12,000?
+  c) Between $9,000 and $12,000?
+  
+**6. The number of customers at a bank each day is found to be normally distributed with mean 250 and standard deviation of 110. What fraction of days will have less than 100 customers? More than 320? What number of customers will be exceeded 10% of the time?**
+
+**7. Assume that the prices paid for housing within a neighborhood have a normal
+distribution, with mean $100,000, and standard deviation $35,000**
+
+  a. What percentage of houses in the neighborhood have prices between
+$90,000 and $130,000?
+  b. What price of housing is such that only 12% of all houses in the
+neighborhood have lower prices?
+
+**8. If the probability that an individual moves outside of their country of residence in a given year is 0.15, what is the probability that**
+  a. Less than three out of a sample of ten move outside the country?
+  b. At least one moves outside the country?
+
+**9. There are an average of four accidents per month at an intersection.**
+  a. What is the probability of three or more accidents next month?
+  b. What is the probability of two or more accidents in a 23-day period?
+
+**10. The annual probability of moving is 0.17.**
+  a. What is the probability that a person moves for the first time in the first year of observation?
+  
+  b. What is the probability that the person moves for the first time in the fourth year of observation?
+  
+  c. What is the mean time it takes for an individual to move?
+  
+  d. What is the variance of the time it takes for a person to move?
+  
+  e. Among ten people, what is the probability that three of fewer move in a given year?
