@@ -402,24 +402,48 @@ The significance level $\alpha$ remains **unchanged** with an increase in sample
 
 ------------------------------------------------------------------------
 
-# Problem 8: Toad Experiment P-values
+# Problem 8: Toad Experiment P-values Calculation
 
-In the toad experiment, calculate the P-value based on the number of right-handed toads:
+In the toad experiment, we calculate P-values for various counts of right-handed toads.
 
-## Step 1: P-value for 15 Right-Handed Toads
+## For 15 Right-Handed Toads:
 
-If 15 toads were right-handed and the rest left-handed, calculate the P-value using the binomial distribution.
+The probability of observing 15 or more right-handed toads in a sample of 30 (under $H_0: p = 0.5$) is:
 
-## Step 2: P-value for 13 Right-Handed Toads
+$$
+P(X \geq 15) = P(X = 15) + P(X = 16) + \ldots + P(X = 30)
+$$
 
-If 13 toads were right-handed and the rest left-handed, calculate the P-value.
+Using the binomial formula:
 
-## Step 3: P-value for 10 Right-Handed Toads
+$$
+P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}
+$$
 
-If 10 toads were right-handed and the rest left-handed, calculate the P-value.
+Substitute (n = 30) and (p = 0.5).
 
-## Step 4: P-value for 7 Right-Handed Toads
+## For 13 Right-Handed Toads:
 
-If 7 toads were right-handed and the rest left-handed, calculate the P-value.
+Similar to the previous calculation:
+
+$$
+P(X \geq 13) = P(X = 13) + P(X = 14) + \ldots + P(X = 30)
+$$
+
+## For 10 Right-Handed Toads:
+
+Calculate:
+
+$$
+P(X \geq 10) = P(X = 10) + P(X = 11) + \ldots + P(X = 30)
+$$
+
+## For 7 Right-Handed Toads:
+
+Calculate:
+
+$$
+P(X \geq 7) = P(X = 7) + P(X = 8) + \ldots + P(X = 30)
+$$
 
 ------------------------------------------------------------------------
