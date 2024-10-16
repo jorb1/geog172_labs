@@ -1,0 +1,425 @@
+---
+title: "Lab 2 - Step-by-Step"
+
+format: pdf
+---
+
+## Problem 1 Overview
+
+Chen et al. (2011) studied recent changes in the highest elevation at which species occur. The dataset below shows the shifts in elevation (in meters) for 31 species. Positive values indicate upward shifts, while negative values indicate downward shifts.
+
+## a. Sample Size (n)
+
+The sample size $n$ is the number of data points:
+
+$$
+n = 31
+$$
+
+## b. Mean of the Data Points
+
+The mean, denoted as $\bar{x}$, represents the average elevation shift across the sample. The formula for the mean is:
+
+$$
+\bar{x} = \frac{\sum x_i}{n}
+$$
+
+Where: - $\sum x_i$ is the sum of all individual data points, and - $n$ is the sample size.
+
+Using the data, we calculate:
+
+$$
+\bar{x} = 39.33 \, \text{meters}
+$$
+
+## c. Standard Deviation
+
+The standard deviation $s$ is a measure of the spread of the data points. It is calculated using the following formula:
+
+$$
+s = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n-1}}
+$$
+
+Where: - $x_i$ are the individual data points, - $\bar{x}$ is the mean, and - $n-1$ represents the degrees of freedom.
+
+After calculation, the standard deviation is:
+
+$$
+s = 30.66 \, \text{meters}
+$$
+
+## d. Standard Error of the Mean
+
+The standard error (SE) tells us how much the sample mean is expected to vary from the true population mean. The formula is:
+
+$$
+SE = \frac{s}{\sqrt{n}}
+$$
+
+Where: - $s$ is the standard deviation, and - $n$ is the sample size.
+
+For our data, the standard error is:
+
+$$
+SE = 5.51 \, \text{meters}
+$$
+
+## e. Degrees of Freedom
+
+The degrees of freedom $df$ for the t-test and confidence interval calculations is:
+
+$$
+df = n - 1
+$$
+
+For this dataset:
+
+$$
+df = 30
+$$
+
+## f. Alpha for 95% Confidence Interval
+
+For a 95% confidence interval, the significance level $\alpha$ is:
+
+$$
+\alpha = 1 - 0.95 = 0.05
+$$
+
+## g. Critical Value of $t$
+
+Using the t-distribution table, the critical value $t^*$ for a 95% confidence interval with $df = 30$ is approximately:
+
+$$
+t^* \approx 2.042
+$$
+
+## h. Assumptions for Confidence Interval
+
+The key assumptions for constructing a confidence interval are: 1. Random sampling. 2. Normally distributed data. 3. Independence of observations. 4. No extreme outliers.
+
+## i. 95% Confidence Interval for the Mean
+
+To calculate the confidence interval for the mean, use the following formula:
+
+$$
+CI = \bar{x} \pm t^* \cdot \frac{s}{\sqrt{n}}
+$$
+
+Substituting the values:
+
+$$
+CI = 39.33 \pm 2.042 \cdot 5.51
+$$
+
+Which gives:
+
+$$
+CI = (28.08 \, \text{meters}, 50.58 \, \text{meters})
+$$
+
+## j. Hypotheses for One-Sample t-Test
+
+For the one-sample t-test, the hypotheses are: - Null hypothesis $H_0$: The mean elevation shift is zero ($\mu = 0$). - Alternative hypothesis $H_a$: The mean elevation shift is not zero ($\mu \neq 0$).
+
+## k. Test Statistic $t$
+
+The t-statistic is calculated as follows:
+
+$$
+t = \frac{\bar{x} - \mu}{\frac{s}{\sqrt{n}}}
+$$
+
+Where: - $\bar{x}$ is the sample mean, - $\mu$ is the hypothesized population mean (in this case, 0), - $s$ is the standard deviation, and - $n$ is the sample size.
+
+Substituting the values:
+
+$$
+t = \frac{39.33 - 0}{\frac{30.66}{\sqrt{31}}} = 7.14
+$$
+
+## l. Assumptions for One-Sample t-Test
+
+The assumptions for the t-test are: 1. Random sampling. 2. The data follows a normal distribution. 3. Observations are independent. 4. No extreme outliers.
+
+## m. P-value for the Test
+
+The P-value is calculated based on the t-statistic and degrees of freedom. In this case, with a t-value of 7.14 and $df = 30$, the P-value is extremely small:
+
+$$
+P = 6.06 \times 10^{-8}
+$$
+
+## n. Conclusion
+
+Since the P-value is much smaller than 0.05, we reject the null hypothesis. This means that species **did** shift their highest elevation on average over time.
+
+------------------------------------------------------------------------
+
+# Problem 2: Pollutant Level Confidence Interval
+
+A tolerable level of a certain pollutant is 16 mg/l. A researcher takes a sample of size (n = 50), and finds that the mean level of the pollutant is 18.5 mg/l, with a standard deviation of 7 mg/l. We are asked to construct a 95% confidence interval around the mean, and determine whether the tolerable level is within this interval.
+
+## Step 1: Identify the Known Values
+
+We are given: - Sample size $n = 50$ - Sample mean $\bar{x} = 18.5 \, \text{mg/l}$ - Sample standard deviation $s = 7 \, \text{mg/l}$ - Tolerable level = 16 mg/l - Confidence level = 95%
+
+## Step 2: Calculate the Standard Error
+
+The standard error (SE) of the mean is calculated as:
+
+$$
+SE = \frac{s}{\sqrt{n}}
+$$
+
+Substituting the values:
+
+$$
+SE = \frac{7}{\sqrt{50}} = 0.9899
+$$
+
+## Step 3: Find the Critical Value $(t^*)$
+
+For a 95% confidence level with $n - 1 = 49$ degrees of freedom, we look up the critical value in the t-distribution table:
+
+$$
+t^* \approx 2.009
+$$
+
+## Step 4: Calculate the Confidence Interval
+
+The confidence interval (CI) is given by:
+
+$$
+CI = \bar{x} \pm t^* \cdot SE
+$$
+
+Substituting the known values:
+
+$$
+CI = 18.5 \pm 2.009 \cdot 0.9899
+$$
+
+Calculating the margins:
+
+$$
+CI = 18.5 \pm 1.989
+$$
+
+Thus, the 95% confidence interval is:
+
+$$
+CI = (16.51 \, \text{mg/l}, 20.49 \, \text{mg/l})
+$$
+
+## Step 5: Conclusion
+
+The tolerable level of 16 mg/l **is not** within the 95% confidence interval. Therefore, we conclude that the mean pollutant level exceeds the tolerable level based on this sample.
+
+------------------------------------------------------------------------
+
+# Problem 3: Confidence Interval Comparison
+
+Researchers measured the distance between the canine tooth and last molar for 35 wolf upper jaws. They reported: - A 95% confidence interval for the mean: $10.17 \, \text{cm} \leq \mu \leq 10.47 \, \text{cm}$ - A 99% confidence interval for the mean: $10.21 \, \text{cm} \leq \mu \leq 10.44 \, \text{cm}$
+
+Without seeing the data, we are asked to explain why they must have made a mistake.
+
+## Step 1: Confidence Interval Logic
+
+By definition, a **99% confidence interval** is **wider** than a 95% confidence interval. This is because a higher confidence level requires capturing more possible values of the population mean, which increases the interval's range.
+
+## Step 2: Comparing the Intervals
+
+In this case, however, the reported 99% confidence interval $10.21 \, \text{cm} \leq \mu \leq 10.44 \, \text{cm}$ is **narrower** than the 95% confidence interval $10.17 \, \text{cm} \leq \mu \leq 10.47 \, \text{cm}$, which contradicts the expected behavior.
+
+## Step 3: Conclusion
+
+Since the 99% confidence interval is reported to be narrower than the 95% confidence interval, the researchers must have made a mistake in their calculations or reporting. The 99% confidence interval should always be wider than the 95% confidence interval.
+
+------------------------------------------------------------------------
+
+# Problem 4: Wolf Upper Jaws Data Analysis
+
+Here are the data on wolf upper jaws from the previous problem in cm. There are 35 individuals in this data set. Assume that this variable is normally distributed.
+
+$$
+10.2, 10.4, 9.9, 10.7, 10.3, 9.7, 10.3, 10.7, 10.1, 10.6, 10.3, 10.0, 10.2, 10.1, 10.3, 9.9, 9.7, 10.6, 10.4, 10.1, 10.6, 10.3, 10.3, 10.5, 10.2, 10.2, 10.5, 10.1, 11.2, 10.5, 10.3, 10.0, 10.3, 10.7, 11.1
+$$
+
+## Step 1: Histogram
+
+To confirm that the frequency distribution is roughly bell-shaped, a histogram of the data should be plotted.
+
+## Step 2: Calculate the Sample Mean and Standard Error
+
+The sample mean $\bar{x}$ is calculated as:
+
+$$
+\bar{x} = \frac{\sum_{i=1}^{n} x_i}{n}
+$$
+
+where (n = 35) is the number of observations.
+
+The standard error (SE) of the mean is given by:
+
+$$
+SE = \frac{s}{\sqrt{n}}
+$$
+
+where (s) is the sample standard deviation.
+
+## Step 3: Find the 95% Confidence Interval for the Mean
+
+The 95% confidence interval (CI) for the mean is calculated using:
+
+$$
+CI = \bar{x} \pm t^* \cdot SE
+$$
+
+where $t^*$ is the critical value from the t-distribution for $n - 1 = 34$ degrees of freedom.
+
+## Step 4: Find the 99% Confidence Interval for the Variance
+
+The 99% confidence interval for the variance is given by:
+
+$$
+\left( \frac{(n-1)s^2}{\chi^2_{\alpha/2, n-1}}, \frac{(n-1)s^2}{\chi^2_{1-\alpha/2, n-1}} \right)
+$$
+
+where $\chi^2$ are the critical values from the chi-square distribution.
+
+## Step 5: Find the 99% Confidence Interval for the Standard Deviation
+
+The confidence interval for the standard deviation is found by taking the square roots of the variance limits:
+
+$$
+\left( \sqrt{\frac{(n-1)s^2}{\chi^2_{\alpha/2, n-1}}}, \sqrt{\frac{(n-1)s^2}{\chi^2_{1-\alpha/2, n-1}}} \right)
+$$
+
+------------------------------------------------------------------------
+
+# Problem 5: Stream Pollutant Level Hypothesis Testing
+
+A researcher suspects that the level of a particular stream’s pollutant is higher than the allowable limit of 4.2 mg/l. A sample of $n = 17$ reveals a mean pollutant level of 6.4 mg/l with a standard deviation of 4.4 mg/l.
+
+## Step 1: State the Hypotheses
+
+-   Null hypothesis: $H_0: \mu \leq 4.2 \, \text{mg/l}$
+-   Alternative hypothesis: $H_a: \mu > 4.2 \, \text{mg/l}$
+
+## Step 2: Calculate the Test Statistic
+
+The test statistic $t$ is calculated as follows:
+
+$$
+t = \frac{\bar{x} - \mu_0}{SE}
+$$
+
+where $\mu_0 = 4.2 \, \text{mg/l}$ and
+
+$$
+SE = \frac{s}{\sqrt{n}} = \frac{4.4}{\sqrt{17}} \approx 1.07
+$$
+
+## Step 3: Determine the Critical Value
+
+The critical value $t^*$ for a one-tailed test with $\alpha = 0.05$ and $n - 1 = 16$ degrees of freedom is found from the t-distribution table.
+
+## Step 4: Conclusion
+
+Compare the calculated $t$ to $t^*$. If $t > t^*$, we reject the null hypothesis, indicating sufficient evidence that the stream's pollutant level exceeds the allowable limit.
+
+------------------------------------------------------------------------
+
+# Problem 6: Ear Preference Study Using Binomial Test
+
+Do people typically use a particular ear preferentially when listening to strangers? Marzoli and Tomassi (2009) had a researcher approach and speak to strangers in a noisy nightclub. An observer scored whether the person approached turned either the left or the right ear toward the questioner. Of 25 participants, 19 turned the right ear and 6 offered the left ear.
+
+## Step 1: State the Null and Alternative Hypotheses
+
+-   Null hypothesis: $H_0: p = 0.5$ (no preference)
+-   Alternative hypothesis: $H_a: p \neq 0.5$ (preference exists)
+
+## Step 2: Observed Value of the Test Statistic
+
+The observed value of the test statistic is the number of right ears turned, which is $k = 19$.
+
+## Step 3: Probability of Observed Outcome
+
+Calculate the probability of getting exactly 19 right ears (successes) out of 25 trials under the null hypothesis:
+
+$$
+P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}
+$$
+
+where $n = 25$, $k = 19$, and $p = 0.5$.
+
+## Step 4: List Possible Outcomes
+
+List all possible outcomes in which the number of right ears is greater than the 19 observed (i.e., 20 to 25).
+
+## Step 5: Calculate the Probability of Extreme Outcomes
+
+Calculate the probability of each of the extreme outcomes listed in Step 4.
+
+## Step 6: Calculate the Total Probability
+
+Calculate the total probability of obtaining 19 or more right-eared turns under the null hypothesis:
+
+$$
+P(X \geq 19) = \sum_{k=19}^{25} P(X = k)
+$$
+
+## Step 7: Two-Tailed P-value
+
+The two-tailed P-value is twice the probability calculated in Step 6.
+
+## Step 8: Interpret the P-value
+
+Interpret the P-value: If it is less than the significance level (typically 0.05), we reject the null hypothesis, suggesting evidence of ear preference.
+
+## Step 9: Conclusion
+
+State the conclusion from the test based on the P-value.
+
+------------------------------------------------------------------------
+
+# Problem 7: Effects of Increasing Sample Size
+
+Assume a random sample. What effect does increasing the sample size have on:
+
+## Step 1: Type I Error Probability
+
+Increasing the sample size does **not** affect the probability of committing a Type I error, which remains at $\alpha$.
+
+## Step 2: Type II Error Probability
+
+Increasing the sample size **decreases** the probability of committing a Type II error ($\beta$), increasing power.
+
+## Step 3: Significance Level
+
+The significance level $\alpha$ remains **unchanged** with an increase in sample size.
+
+------------------------------------------------------------------------
+
+# Problem 8: Toad Experiment P-values
+
+In the toad experiment, calculate the P-value based on the number of right-handed toads:
+
+## Step 1: P-value for 15 Right-Handed Toads
+
+If 15 toads were right-handed and the rest left-handed, calculate the P-value using the binomial distribution.
+
+## Step 2: P-value for 13 Right-Handed Toads
+
+If 13 toads were right-handed and the rest left-handed, calculate the P-value.
+
+## Step 3: P-value for 10 Right-Handed Toads
+
+If 10 toads were right-handed and the rest left-handed, calculate the P-value.
+
+## Step 4: P-value for 7 Right-Handed Toads
+
+If 7 toads were right-handed and the rest left-handed, calculate the P-value.
+
+------------------------------------------------------------------------

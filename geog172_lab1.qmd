@@ -14,6 +14,13 @@ library(tibble)
 library(dplyr)
 library(knitr)
 library(here)
+library(patchwork)
+library(ggrepel)
+library(gghighlight)
+library(paletteer)
+library(ggExtra)
+library(ggbeeswarm)
+library(ggplot2)
 ```
 
 
@@ -43,38 +50,97 @@ first19 <- incomes[c(1:19), c(1:2)]
 
 #find the mean
 first19_mean <- mean(first19$Income)
-print(first19_mean)
+#Print results
+cat("Mean:", first19_mean, "\n")
 
 #find the median
 first19_median <- median(first19$Income)
-print(first19_median)
+#Print results
+cat("Median:", first19_median, "\n")
 
 #find the range
 first19_range <- range(first19$Income)
-print(first19_range)
+#Print results
+cat("Range:", first19_range, "\n")
 
 #find the interquartile range
 first19_iqr <- IQR(first19$Income)
-print(first19_iqr)
+#Print results
+cat("Interquartile Range:", first19_iqr, "\n")
 
 #find the standard deviation
 first19_sd <- sd(first19$Income)
-print(first19_sd)
+#Print results
+cat("Standard Deviation:", first19_sd, "\n")
 
 #find the variance
 first19_var <- var(first19$Income)
-print(first19_var)
+#Print results
+cat("Variance:", first19_var, "\n")
 
 #construct a boxplot
+ggplot(data = first19, aes(x = Income)) +
+  geom_boxplot(fill = "seagreen", color = "black") + 
+  theme_minimal()
 
 #construct a histogram
+ggplot(data = first19, aes(x = Income)) +
+  geom_histogram(binwidth = 2000, fill = "coral", color = "black") +
+  theme_minimal()
+
 ```
 
   
   b) Repeat part a, this time using all 236 observations.
   
+```{r}
+#find the mean for ALL observations
+all_mean <- mean(incomes$Income)
+#Print results
+cat("Mean:", all_mean, "\n")
+
+#find the median for ALL observations
+all_median <- median(incomes$Income)
+#Print results
+cat("Median:", all_median, "\n")
+
+#find the range for ALL observations
+all_range <- range(incomes$Income)
+#Print results
+cat("Range:", all_range, "\n")
+
+#find the interquartile range for ALL observations
+all_iqr <- IQR(incomes$Income)
+#Print results
+cat("Interquartile Range:", all_iqr, "\n")
+
+#find the standard deviation for ALL observations
+all_sd <- sd(incomes$Income)
+#Print results
+cat("Standard Deviation:", all_sd, "\n")
+
+#find the variance for ALL observations
+all_var <- var(incomes$Income)
+#Print results
+cat("Variance:", all_var, "\n")
+
+#construct a boxplot for ALL observations
+ggplot(data = incomes, aes(x = Income)) +
+  geom_boxplot(fill = "seagreen", color = "black") + 
+  theme_minimal()
+
+#construct a histogram for ALL observations
+ggplot(data = incomes, aes(x = Income)) +
+  geom_histogram(binwidth = 5000, fill = "coral", color = "black") +
+  theme_minimal()
+
+```
+
   
   c) Comment on your results. In particular, what does it mean to find the mean of set of medians? How do the observations that have a value of 0 affect the results? Should they be included?
+```{r}
+#No strict correct answer. Write your thoughts!
+```
 
 
 
@@ -83,10 +149,51 @@ print(first19_var)
 100, 426, 322, 466, 112, 155, 388, 1155, 234, 324, 556, 221, 18, 133, 177, 441.
 
   Find the mean and standard deviation of the stream lengths.
+  
+```{r}
+stream_link <- c(100, 426, 322, 466, 112, 155, 388, 1155, 234, 324, 556, 221, 18, 133, 177, 441)
+
+#Calculate mean
+stream_mean <- mean(stream_link)
+
+#Print results
+cat("Mean:", stream_mean, "\n")
+
+#Calculate Standard Deviation
+stream_sd <- sd(stream_link)
+
+#Print results
+cat("Standard Deviation:", stream_sd, "\n")
+
+```
+
 
 **3. What is the coefficient of variation among the following commuting times (in minutes):**
 
 23, 43, 42, 7, 23, 11, 23, 55?
+
+```{r}
+commuting <- c(23, 43, 42, 7, 23, 11, 23, 55)
+
+# Calculate the mean
+mean_value <- mean(commuting)
+
+# Calculate the standard deviation
+std_dev <- sd(commuting)
+
+# Calculate the coefficient of variation
+cv <- (std_dev / mean_value) * 100
+
+# Print the results
+cat("Coefficient of Variation:", cv, "%\n")
+
+```
+
+
+
+
+
+
 
 **4. The following data are derived by Rogerson et al. (1993) from the US National Survey of Families and Households. Cumulative relative frequency distribution of distance to parents among adult children is shown below:**
 
@@ -102,7 +209,7 @@ families_df <- data.frame(
                                   0.945, 0.966, 0.974, 0.994)
 )
 
-# Check the data frame
+# Look at the data frame
 kable(families_df, format = "markdown")
 
 ```
@@ -112,43 +219,224 @@ Questions below apply to adult children who have both parents alive and living t
 
   a. What fraction of adult children have parents that live more than 30 miles away,
 but no more than 100 miles away?
+
+```{r}
+# Calculate the fraction of adult children with parents living more than 30 but no more than 100 miles away
+fraction_a <- families_df$CumulativeRelativeFrequency[which(families_df$Distance == 100)] - 
+              families_df$CumulativeRelativeFrequency[which(families_df$Distance == 30)]
+fraction_a
+
+```
+
   b. What fraction of adult children has parents that live more than 250 miles away?
+  
+```{r}
+# Calculate the fraction of adult children with parents living more than 250 miles away
+fraction_b <- 1 - families_df$CumulativeRelativeFrequency[which(families_df$Distance == 250)]
+fraction_b
+
+```
+  
   c. What is the likelihood that at least one of three randomly chosen adults will have
 parents living more than 100 miles away?
+
+```{r}
+# Probability of having parents living more than 100 miles away
+p_more_than_100 <- 1 - families_df$CumulativeRelativeFrequency[which(families_df$Distance == 100)]
+
+# Probability that at least one of three has parents living more than 100 miles away
+p_at_least_one <- 1 - (1 - p_more_than_100)^3
+p_at_least_one
+
+```
+
   i. Show sample space.
+```{r}
+sample_space <- c("More than 100 miles", "Not more than 100 miles")
+sample_space
+
+```
+
   ii. Assign probabilities to each element in the sample space.
+```{r}
+probabilities <- c(p_more_than_100, 1 - p_more_than_100)
+names(probabilities) <- sample_space
+probabilities
+
+```
+
   iii. Give the desired probability.
+```{r}
+#The probability you calculated for at least one of three randomly chosen adults will have parents living more than 100 miles away is already in p_at_least_one.
+```
 
-d. What is the median distance that characterizes the spatial separation of parents
-and their adult children?
 
-e. Determine the likelihood that two or more adult children out of a group of ten live
-more than 1000 miles from their parents.
+d. What is the median distance that characterizes the spatial separation of parents and their adult children?
+```{r}
+# Median distance
+median_distance <- median(families_df$Distance)
+median_distance
+```
+
+
+e. Determine the likelihood that two or more adult children out of a group of ten live more than 1000 miles from their parents.
+```{r}
+# Probability of living more than 1000 miles away
+p_more_than_1000 <- 1 - families_df$CumulativeRelativeFrequency[which(families_df$Distance == 1000)]
+
+# Probability of two or more out of ten
+n <- 10
+k <- 2
+prob_two_or_more <- 1 - pbinom(k - 1, n, p_more_than_1000)
+prob_two_or_more
+
+```
+
+
+
+
+
+
+
 
 **5. Incomes are exponentially distributed with a mean of $10,000. What fraction of the population has income:**
   a) Less than or equal to $8000?
   b) Greater than $12,000?
   c) Between $9,000 and $12,000?
   
+```{r}
+#Calculating this will involve probability density functions(p.d.f)
+# Parameters
+mean_income <- 10000
+
+# a. Fraction with income less than or equal to $8000
+x_a <- 8000
+fraction_a <- 1 - exp(-x_a / mean_income)
+
+# b. Fraction with income greater than $12,000
+x_b <- 12000
+fraction_b <- exp(-x_b / mean_income)
+
+# c. Fraction with income between $9,000 and $12,000
+x_c1 <- 9000
+x_c2 <- 12000
+fraction_c <- (1 - exp(-x_c2 / mean_income)) - (1 - exp(-x_c1 / mean_income))
+
+# Results
+cat("Fraction (a):", fraction_a, "\n")
+cat("Fraction (b):", fraction_b, "\n")
+cat("Fraction (c):", fraction_c, "\n")
+
+```
+
+  
 **6. The number of customers at a bank each day is found to be normally distributed with mean 250 and standard deviation of 110. What fraction of days will have less than 100 customers? More than 320? What number of customers will be exceeded 10% of the time?**
 
-**7. Assume that the prices paid for housing within a neighborhood have a normal
-distribution, with mean $100,000, and standard deviation $35,000**
+```{r}
+# Parameters
+mean_customers <- 250
+std_dev_customers <- 110
+
+# a. Fraction of days with less than 100 customers
+p_less_100 <- pnorm(100, mean = mean_customers, sd = std_dev_customers)
+
+# b. Fraction of days with more than 320 customers
+p_more_320 <- 1 - pnorm(320, mean = mean_customers, sd = std_dev_customers)
+
+# c. Number of customers exceeded 10% of the time
+# Z-score for 90th percentile
+z_90 <- qnorm(0.90)
+
+# Calculate the corresponding number of customers
+customers_90th <- mean_customers + z_90 * std_dev_customers
+
+# Results
+cat("Fraction of days with less than 100 customers:", p_less_100, "\n")
+cat("Fraction of days with more than 320 customers:", p_more_320, "\n")
+cat("Number of customers exceeded 10% of the time:", customers_90th, "\n")
+
+```
+
+
+**7. Assume that the prices paid for housing within a neighborhood have a normal distribution, with mean $100,000, and standard deviation $35,000**
 
   a. What percentage of houses in the neighborhood have prices between
 $90,000 and $130,000?
   b. What price of housing is such that only 12% of all houses in the
 neighborhood have lower prices?
 
+```{r}
+# Parameters
+mean_price <- 100000
+std_dev_price <- 35000
+
+# a. Percentage of houses with prices between $90,000 and $130,000
+p_between_90k_130k <- pnorm(130000, mean = mean_price, sd = std_dev_price) - 
+                       pnorm(90000, mean = mean_price, sd = std_dev_price)
+
+# Convert to percentage
+percentage_between_90k_130k <- p_between_90k_130k * 100
+
+# b. Price such that only 12% of houses have lower prices
+z_12 <- qnorm(0.12)
+price_12_percent <- mean_price + z_12 * std_dev_price
+
+# Results
+cat("Percentage of houses between $90,000 and $130,000:", percentage_between_90k_130k, "%\n")
+cat("Price of housing such that only 12% have lower prices:", price_12_percent, "\n")
+
+```
+
+
 **8. If the probability that an individual moves outside of their country of residence in a given year is 0.15, what is the probability that**
   a. Less than three out of a sample of ten move outside the country?
   b. At least one moves outside the country?
+  
+```{r}
+# Parameters
+p <- 0.15  # probability of moving
+n <- 10    # sample size
+
+# a. Probability that less than 3 move outside the country
+p_less_than_3 <- sum(dbinom(0:2, size = n, prob = p))
+
+# b. Probability that at least one moves outside the country
+p_at_least_one <- 1 - dbinom(0, size = n, prob = p)
+
+# Results
+cat("Probability that less than 3 move outside the country:", p_less_than_3, "\n")
+cat("Probability that at least one moves outside the country:", p_at_least_one, "\n")
+
+```
+
 
 **9. There are an average of four accidents per month at an intersection.**
   a. What is the probability of three or more accidents next month?
-  b. What is the probability of two or more accidents in a 23-day period?
+  b. What is the probability of two or more accidents in a 23-day period
+
+```{r}
+# Parameters
+lambda_month <- 4              # average accidents per month
+lambda_23_days <- (4 / 30) * 23 # average accidents in 23 days
+
+# a. Probability of three or more accidents next month
+p_three_or_more <- 1 - (dpois(0, lambda_month) + 
+                         dpois(1, lambda_month) + 
+                         dpois(2, lambda_month))
+
+# b. Probability of two or more accidents in a 23-day period
+p_two_or_more_23_days <- 1 - (dpois(0, lambda_23_days) + 
+                               dpois(1, lambda_23_days))
+
+# Results
+cat("Probability of three or more accidents next month:", p_three_or_more, "\n")
+cat("Probability of two or more accidents in a 23-day period:", p_two_or_more_23_days, "\n")
+
+```
+
 
 **10. The annual probability of moving is 0.17.**
+
   a. What is the probability that a person moves for the first time in the first year of observation?
   
   b. What is the probability that the person moves for the first time in the fourth year of observation?
@@ -158,3 +446,34 @@ neighborhood have lower prices?
   d. What is the variance of the time it takes for a person to move?
   
   e. Among ten people, what is the probability that three of fewer move in a given year?
+  
+```{r}
+# Parameters
+p <- 0.17  # probability of moving
+q <- 1 - p # probability of not moving
+n <- 10    # sample size
+
+# a. Probability of moving for the first time in the first year
+prob_first_year <- p
+
+# b. Probability of moving for the first time in the fourth year
+prob_fourth_year <- q^3 * p
+
+# c. Mean time it takes for an individual to move
+mean_time <- 1 / p
+
+# d. Variance of the time it takes for a person to move
+variance_time <- q / (p^2)
+
+# e. Probability that three or fewer move among ten people
+p_three_or_fewer <- sum(dbinom(0:3, size = n, prob = p))
+
+# Results
+cat("Probability of moving for the first time in the first year:", prob_first_year, "\n")
+cat("Probability of moving for the first time in the fourth year:", prob_fourth_year, "\n")
+cat("Mean time to move:", mean_time, "\n")
+cat("Variance of time to move:", variance_time, "\n")
+cat("Probability that three or fewer move among ten people:", p_three_or_fewer, "\n")
+
+```
+
